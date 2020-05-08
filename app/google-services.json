@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "293536383518",
+    "firebase_url": "https://chatapp-1b82a.firebaseio.com",
+    "project_id": "chatapp-1b82a",
+    "storage_bucket": "chatapp-1b82a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293536383518:android:7619ad65adb1efae9c640f",
+        "android_client_info": {
+          "package_name": "com.ecemokan.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293536383518-v26bmivd6o3ptklqmfnp4jgt5i0tbk5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVmBZPhhAbzdPlgAwBL_d7GBiikiVUu_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293536383518-v26bmivd6o3ptklqmfnp4jgt5i0tbk5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
