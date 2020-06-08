@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar=findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("WhatsApp");
+        getSupportActionBar().setTitle("Messages");
 
         myViewPager=findViewById(R.id.main_tabs_pager);
         myTabsAccessorAdapter=new TabsAccessorAdapter(getSupportFragmentManager());

@@ -3,6 +3,8 @@ package com.ecemokan.chatapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 public class GroupChatActivity extends AppCompatActivity
 {
@@ -205,9 +208,11 @@ public class GroupChatActivity extends AppCompatActivity
             String chatName = (String) ((DataSnapshot)iterator.next()).getValue();
             String chatTime = (String) ((DataSnapshot)iterator.next()).getValue();
 
-            displayTextMessages.append(chatName + " :\n" + chatMessage + "\n" + chatTime + "     " + chatDate + "\n\n\n");
+            displayTextMessages.append(chatName + " :\n" + chatMessage + "\n\n");
 
-            mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
+        mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+
+
     }
 }

@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +36,16 @@ public class LoginActivity extends AppCompatActivity {
     private TextView NeedNewAccountLink, ForgetPasswordLink;
 
     private DatabaseReference UsersRef;
+    RelativeLayout rellay1, rellay2;
 
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            rellay1.setVisibility(View.VISIBLE);
+            rellay2.setVisibility(View.VISIBLE);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,14 +77,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        PhoneLoginButton.setOnClickListener(new View.OnClickListener() {
+       /* PhoneLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
                 Intent phoneLoginIntent = new Intent(LoginActivity.this, PhoneLoginActivity.class);
                 startActivity(phoneLoginIntent);
             }
-        });
+        }); */
 
     }
 
@@ -154,12 +165,14 @@ public class LoginActivity extends AppCompatActivity {
     private void InitializeFields()
     {
         LoginButton = findViewById(R.id.login_button);
-        PhoneLoginButton =  findViewById(R.id.phone_login_button);
         UserEmail = findViewById(R.id.login_email);
         UserPassword = findViewById(R.id.login_password);
         NeedNewAccountLink =  findViewById(R.id.need_new_account_link);
-        ForgetPasswordLink =  findViewById(R.id.forget_password_link);
 
+        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
+        rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
+
+        handler.postDelayed(runnable, 2000);
         loadingBar = new ProgressDialog(this);
     }
 

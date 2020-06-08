@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#006257</color>
-    <color name="colorPrimaryDark">#005048</color>
-    <color name="colorAccent">#E6E6E6</color>
+    <color name="colorPrimary">#313240</color>
+    <color name="colorPrimaryDark">#2A2A35</color>
+    <color name="colorAccent">#C1B4AF</color>
+    <color name="colorBlue">#3276C4</color>
+    <color name="colorWhite">#CFC9C9</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="gradStart">#2A2A35</color>
+    <color name="gradStop">#36364E</color>
+
+
 </resources>

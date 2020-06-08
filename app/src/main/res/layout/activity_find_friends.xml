@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FindFriendsActivity">
+    tools:context=".FindFriendsActivity"
+    android:background="@color/colorPrimary">
 
     <include
-        layout="@layout/app_bar_layout"
+        layout="@layout/app_bar_layout_elevation"
         android:id="@+id/find_friends_toolbar"
         >
     </include>
@@ -19,6 +20,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/find_friends_toolbar"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        />
 
 </RelativeLayout>

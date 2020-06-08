@@ -70,6 +70,7 @@ public class GroupsFragment extends Fragment {
     private void IntializeFields()
     {
         list_view = groupFragmentView.findViewById(R.id.list_view);
+
         arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, list_of_groups);
         list_view.setAdapter(arrayAdapter);
     }

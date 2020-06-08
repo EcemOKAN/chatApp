@@ -4,129 +4,160 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/grad_bg"
     tools:context=".LoginActivity">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+
+        <ImageView
+            android:id="@+id/imgView_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_logo" />
+
+
+
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:id="@+id/rellay1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-
-            <EditText
-                android:id="@+id/login_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:hint="Email..."
-                android:inputType="textEmailAddress"
-                android:background="@drawable/inputs"
-                android:padding="4dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                />
-
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/login_email"
-                android:hint="Password..."
-                android:inputType="textPassword"
-                android:background="@drawable/inputs"
-                android:padding="4dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                />
+            android:layout_below="@+id/imgView_logo"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/forget_password_link"
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Login"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:id="@+id/linlay1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/login_password"
-                android:text="Forget Password ?"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="23dp"
-                android:textAlignment="textEnd"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                />
+                android:layout_below="@+id/tv_login"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="E-mail"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/login_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="account@trakya.edu.tr"
+                        android:textColorHint="@color/white"
+                        android:inputType="textEmailAddress"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Password"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/login_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="******"
+                        android:textColorHint="@color/white"
+                        android:inputType="textPassword"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/forget_password_link"
-                android:padding="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="19dp"
-                android:layout_marginRight="19dp"
-                android:text="Login"
-                android:textAllCaps="false"
-                android:textSize="24sp"
-                android:textColor="@android:color/background_light"
-                android:background="@drawable/buttons"
-                />
-
-            <TextView
-                android:id="@+id/need_new_account_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@+id/linlay1"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/login_button"
-                android:text="Need new Account ?"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="23dp"
-                android:textAlignment="center"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                />
-
-            <TextView
-                android:id="@+id/login_using"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/need_new_account_link"
-                android:text="or Login using your"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="23dp"
-                android:textAlignment="center"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                />
-
-            <Button
-                android:id="@+id/phone_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login_using"
-                android:padding="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="19dp"
-                android:layout_marginRight="19dp"
-                android:text="Phone"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="sans-serif-medium"
+                android:paddingLeft="70dp"
+                android:paddingRight="70dp"
+                android:text="Login Now"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:textColor="@android:color/background_light"
-                android:background="@drawable/buttons"
-                />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
         </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rellay2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/need_new_account_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:fontFamily="sans-serif"
+            android:text="Need New Account?"
+            android:textAllCaps="true"
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
