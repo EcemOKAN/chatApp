@@ -78,6 +78,14 @@ public class ChatActivity extends AppCompatActivity {
 
     private ProgressDialog loadingBar;
 
+    private PlayfairMain mPlayfairMain;
+    private String mKey = "playfairexample".toUpperCase();
+    private String mTable;
+    private String mWords;
+    private String mInfo;
+    private String mCiphertext;
+    private String mPlaintext;
+
 
 
 
@@ -438,7 +446,18 @@ public class ChatActivity extends AppCompatActivity {
 
     private void SendMessage()
     {
+
+        mPlayfairMain = new PlayfairMain();
+
+
         String messageText = MessageInputText.getText().toString();
+
+        mWords = messageText.toUpperCase();
+
+        mTable = mPlayfairMain.getTable(mKey);
+        mInfo = mPlayfairMain.getInfo(mWords);
+        mCiphertext = mPlayfairMain.getCiphertext(mTable, mInfo);
+        mPlaintext= mPlayfairMain.getPlaintext(mTable, mCiphertext);
 
         if (TextUtils.isEmpty(messageText))
         {
@@ -455,7 +474,7 @@ public class ChatActivity extends AppCompatActivity {
             String messagePushID = userMessageKeyRef.getKey();
 
             Map messageTextBody = new HashMap();
-            messageTextBody.put("message", messageText);
+            messageTextBody.put("message", mCiphertext);
             messageTextBody.put("type", "text");
             messageTextBody.put("from", messageSenderID);
             messageTextBody.put("to", messageReceiverID);

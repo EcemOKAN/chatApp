@@ -2,6 +2,7 @@ package com.ecemokan.chatapp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -38,7 +39,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     private List<Messages> userMessagesList;
     private FirebaseAuth mAuth;
     private DatabaseReference usersRef;
-
+    private boolean decryptionType=false;
+    private PlayfairMain mPlayfairMain;
+    private String mKey = "playfairexample".toUpperCase();
+    private String mTable;
+    private String mPlaintext;
+    String messageSenderId;
 
     public MessageAdapter (List<Messages> userMessagesList)
     {
@@ -53,7 +59,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public CircleImageView receiverProfileImage;
         public ImageView messageSenderPicture, messageReceiverPicture;
 
-
         public MessageViewHolder(@NonNull View itemView)
         {
             super(itemView);
@@ -66,6 +71,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             receiverProfileImage = itemView.findViewById(R.id.message_profile_image);
             messageReceiverPicture = itemView.findViewById(R.id.message_receiver_image_view);
             messageSenderPicture = itemView.findViewById(R.id.message_sender_image_view);
+
         }
     }
 
@@ -89,7 +95,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(@NonNull final MessageViewHolder messageViewHolder, final int position)
     {
-        String messageSenderId = mAuth.getCurrentUser().getUid();
+        messageSenderId = mAuth.getCurrentUser().getUid();
         Messages messages = userMessagesList.get(position);
 
         String fromUserID = messages.getFrom();
@@ -118,6 +124,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
 
 
+        mPlayfairMain = new PlayfairMain();
 
         messageViewHolder.receiverMessageText.setVisibility(View.GONE);
         messageViewHolder.receiverProfileImage.setVisibility(View.GONE);
@@ -128,12 +135,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         if (fromMessageType.equals("text"))
         {
-            if (fromUserID.equals(messageSenderId))
-            {
+            if (fromUserID.equals(messageSenderId)) {
                 messageViewHolder.senderMessageText.setVisibility(View.VISIBLE);
 
                 messageViewHolder.senderMessageText.setBackgroundResource(R.drawable.sender_messages_layout);
                 messageViewHolder.senderMessageText.setTextColor(Color.WHITE);
+
+                //deneme
                 messageViewHolder.senderMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
             }
             else
@@ -143,6 +151,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
                 messageViewHolder.receiverMessageText.setBackgroundResource(R.drawable.receiver_messages_layout);
                 messageViewHolder.receiverMessageText.setTextColor(Color.WHITE);
+
+                //deneme
                 messageViewHolder.receiverMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
             }
         }
@@ -236,8 +246,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                               {
                                       "Delete for me",
                                       "Cancel",
-                                      "Delete for everyone"
+                                      "Delete for everyone",
+                                      "Decryption",
+                                      "Encryption"
                               };
+
                       AlertDialog.Builder builder = new AlertDialog.Builder(messageViewHolder.itemView.getContext());
                       builder.setTitle("Delete message?");
 
@@ -258,6 +271,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                   Intent intent = new Intent(messageViewHolder.itemView.getContext(),MainActivity.class);
                                   messageViewHolder.itemView.getContext().startActivity(intent);
                               }
+                              else if(which ==3)
+                              {
+                                  //deneme
+                                  decryptionType=true;
+                                  messageDecryption(position,messageViewHolder);
+                              }
+                              else if(which ==4)
+                              {
+                                  decryptionType=false;
+                                  messageEncryption(position,messageViewHolder);
+                              }
+
 
                           }
                       });
@@ -353,6 +378,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                 {
                                         "Delete for me",
                                         "Cancel",
+                                        "Decryption",
+                                        "Encryption"
                                 };
                         AlertDialog.Builder builder = new AlertDialog.Builder(messageViewHolder.itemView.getContext());
                         builder.setTitle("Delete message?");
@@ -366,6 +393,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                     deleteReceiveMessages(position,messageViewHolder);
                                     Intent intent = new Intent(messageViewHolder.itemView.getContext(),MainActivity.class);
                                     messageViewHolder.itemView.getContext().startActivity(intent);
+                                }
+                                else if(which ==2)
+                                {
+                                    //deneme
+                                    decryptionType=true;
+                                    messageDecryption(position,messageViewHolder);
+                                }
+                                else if(which ==3)
+                                {
+                                    decryptionType=false;
+                                    messageEncryption(position,messageViewHolder);
                                 }
 
                             }
@@ -410,8 +448,59 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 }
             });
         }
+
+
     }
 
+    //deneme
+    private void messageDecryption(final int position,MessageViewHolder messageViewHolder)
+    {
+        Messages messages = userMessagesList.get(position);
+
+        if (messages.getFrom().equals(messageSenderId))
+        {
+            if (decryptionType == true) {
+                mTable = mPlayfairMain.getTable(mKey);
+                mPlaintext= mPlayfairMain.getPlaintext(mTable, messages.getMessage());
+                messageViewHolder.senderMessageText.setText(mPlaintext + "\n \n" + messages.getTime() + " - " + messages.getDate());
+            }else {
+                messageViewHolder.senderMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
+            }
+        }
+        else{
+            if (decryptionType == true) {
+                mTable = mPlayfairMain.getTable(mKey);
+                mPlaintext= mPlayfairMain.getPlaintext(mTable, messages.getMessage());
+                messageViewHolder.receiverMessageText.setText(mPlaintext + "\n \n" + messages.getTime() + " - " + messages.getDate());
+            }else {
+                messageViewHolder.receiverMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
+            }
+        }
+    }
+    private void messageEncryption(final int position,MessageViewHolder messageViewHolder)
+    {
+        Messages messages = userMessagesList.get(position);
+
+        if (messages.getFrom().equals(messageSenderId))
+        {
+            if (decryptionType == false) {
+                mTable = mPlayfairMain.getTable(mKey);
+                mPlaintext= mPlayfairMain.getPlaintext(mTable, messages.getMessage());
+                messageViewHolder.senderMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
+            }else {
+                messageViewHolder.senderMessageText.setText(mPlaintext + "\n \n" + messages.getTime() + " - " + messages.getDate());
+            }
+        }
+        else{
+            if (decryptionType == false) {
+                mTable = mPlayfairMain.getTable(mKey);
+                mPlaintext= mPlayfairMain.getPlaintext(mTable, messages.getMessage());
+                messageViewHolder.receiverMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
+            }else {
+                messageViewHolder.receiverMessageText.setText(mPlaintext + "\n \n" + messages.getTime() + " - " + messages.getDate());
+            }
+        }
+    }
 
 
 
@@ -420,6 +509,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     {
         return userMessagesList.size();
     }
+
 
 
     private void deleteSentMessage(final int position,final MessageViewHolder holder)

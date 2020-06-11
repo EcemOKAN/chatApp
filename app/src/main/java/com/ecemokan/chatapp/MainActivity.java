@@ -230,9 +230,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.main_find_friends_option) {
             SendUserToFindFriensActivity();
         }
-        if (item.getItemId() == R.id.main_create_group_option) {
-            RequestNewGroup();
-        }
+
         return true;
     }
 

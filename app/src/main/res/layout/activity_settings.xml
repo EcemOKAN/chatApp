@@ -54,7 +54,7 @@
         android:hint="Hey, I am available now."
         android:textColorHint="@color/white"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:background="@drawable/et_bg"
         android:fontFamily="sans-serif-light"

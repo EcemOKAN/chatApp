@@ -78,10 +78,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="Accept"
+                    android:background="@drawable/btn_bg"
                     android:textSize="16sp"
+                    android:textColor="@color/white"
                     android:textAllCaps="false"
-                    android:background="@color/colorPrimaryDark"
                     android:visibility="invisible"
+                    android:fontFamily="sans-serif-medium"
+
                     />
 
                 <Button
@@ -90,10 +93,10 @@
                     android:layout_height="30dp"
                     android:text="Cancel"
                     android:layout_marginStart="10dp"
+                    android:background="@drawable/btn_bg"
                     android:textSize="16sp"
+                    android:textColor="@color/white"
                     android:textAllCaps="false"
-                    android:background="@color/colorPrimaryDark"
-                    android:textColor="@android:color/background_light"
                     android:visibility="invisible"
                     />
 
